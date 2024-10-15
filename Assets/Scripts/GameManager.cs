@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private Text scoreText;
     [SerializeField] private Text livesText;
+    [SerializeField] private Text coinsText;  // New field for displaying coins
 
     private Player player;
     private Invaders invaders;
@@ -17,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     public int score { get; private set; } = 0;
     public int lives { get; private set; } = 3;
-
+    public int coins { get; private set; } = 0; // New field for coins
     private void Awake()
     {
         if (Instance != null) {
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour
 
         SetScore(0);
         SetLives(3);
+        SetCoins(0);  // Reset coins when starting a new game
         NewRound();
     }
 
@@ -96,6 +98,17 @@ public class GameManager : MonoBehaviour
     {
         this.lives = Mathf.Max(lives, 0);
         livesText.text = this.lives.ToString();
+    }
+    // Coin
+    private void SetCoins(int coins)  // New method for setting coins
+    {
+        this.coins = coins;
+        coinsText.text = coins.ToString();
+    }
+
+    public void AddCoin()  // New method for adding a coin
+    {
+        SetCoins(coins + 1);
     }
 
     public void OnPlayerKilled(Player player)

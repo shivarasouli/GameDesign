@@ -57,14 +57,10 @@ public class Player : MonoBehaviour
         // there is not already an active laser
         if (laser == null && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)))
         {
-            // Create the laser at the player's position and make it move in the player's facing direction
-            laser = Instantiate(laserPrefab, transform.position, );
-
-            // Get the player's current facing direction from its rotation
-            /*Vector2 shootDirection =*/ ;  // The player's forward (facing) direction is "up" in local space
-
-/*            laser.GetComponent<Rigidbody2D>().velocity = movementDirection * 10f; // Adjust the speed of the laser
-*/        }
+            // Create the laser and make it move in the player's current movement direction
+            laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
+            laser.GetComponent<Rigidbody2D>().velocity = movementDirection.normalized * 10f; // Adjust the speed of the laser
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
