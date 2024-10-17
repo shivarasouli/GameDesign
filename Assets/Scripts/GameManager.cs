@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private Text scoreText;
     [SerializeField] private Text livesText;
+    [SerializeField] private Text coinsText;  // New field for displaying coins
 
     private Player player;
     private Invaders invaders;
@@ -17,19 +18,23 @@ public class GameManager : MonoBehaviour
 
     public int score { get; private set; } = 0;
     public int lives { get; private set; } = 3;
-
+    public int coins { get; private set; } = 0; // New field for coins
     private void Awake()
     {
-        if (Instance != null) {
+        if (Instance != null)
+        {
             DestroyImmediate(gameObject);
-        } else {
+        }
+        else
+        {
             Instance = this;
         }
     }
 
     private void OnDestroy()
     {
-        if (Instance == this) {
+        if (Instance == this)
+        {
             Instance = null;
         }
     }
@@ -46,7 +51,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (lives <= 0 && Input.GetKeyDown(KeyCode.Return)) {
+        if (lives <= 0 && Input.GetKeyDown(KeyCode.Return))
+        {
             NewGame();
         }
     }
@@ -57,6 +63,7 @@ public class GameManager : MonoBehaviour
 
         SetScore(0);
         SetLives(3);
+        SetCoins(0);  // Reset coins when starting a new game
         NewRound();
     }
 
@@ -65,7 +72,8 @@ public class GameManager : MonoBehaviour
         invaders.ResetInvaders();
         invaders.gameObject.SetActive(true);
 
-        for (int i = 0; i < bunkers.Length; i++) {
+        for (int i = 0; i < bunkers.Length; i++)
+        {
             bunkers[i].ResetBunker();
         }
 
@@ -97,6 +105,17 @@ public class GameManager : MonoBehaviour
         this.lives = Mathf.Max(lives, 0);
         livesText.text = this.lives.ToString();
     }
+    // Coin
+    private void SetCoins(int coins)  // New method for setting coins
+    {
+        this.coins = coins;
+        coinsText.text = coins.ToString();
+    }
+
+    public void AddCoin()  // New method for adding a coin
+    {
+        SetCoins(coins + 1);
+    }
 
     public void OnPlayerKilled(Player player)
     {
@@ -104,9 +123,12 @@ public class GameManager : MonoBehaviour
 
         player.gameObject.SetActive(false);
 
-        if (lives > 0) {
+        if (lives > 0)
+        {
             Invoke(nameof(NewRound), 1f);
-        } else {
+        }
+        else
+        {
             GameOver();
         }
     }
@@ -117,7 +139,8 @@ public class GameManager : MonoBehaviour
 
         SetScore(score + invader.score);
 
-        if (invaders.GetAliveCount() == 0) {
+        if (invaders.GetAliveCount() == 0)
+        {
             NewRound();
         }
     }

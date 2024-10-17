@@ -59,7 +59,8 @@ public class Bunker : MonoBehaviour
     private bool Splat(Vector3 hitPoint)
     {
         // Only proceed if the point maps to a non-empty pixel
-        if (!CheckPoint(hitPoint, out int px, out int py)) {
+        if (!CheckPoint(hitPoint, out int px, out int py))
+        {
             return false;
         }
 
@@ -119,7 +120,8 @@ public class Bunker : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Invader")) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Invader"))
+        {
             gameObject.SetActive(false);
         }
     }
