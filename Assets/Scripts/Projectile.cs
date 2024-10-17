@@ -1,10 +1,24 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(BoxCollider2D))]
 public class Projectile : MonoBehaviour
 {
-    private BoxCollider2D boxCollider;
+    public float speed = 500.0f;
+    public float maxlife = 10.0f;
+    private Rigidbody2D _rigidbody;
+
+    private void Awake()
+    {
+        _rigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    public void Project(Vector2 dir)
+    {
+        _rigidbody.AddForce(dir * this.speed);
+
+        Destroy(this.gameObject, this.maxlife);
+    }
+
+    /*private BoxCollider2D boxCollider;
     public Vector3 direction = Vector3.up;
     public float speed = 20f;
 
@@ -35,6 +49,6 @@ public class Projectile : MonoBehaviour
         if (bunker == null || bunker.CheckCollision(boxCollider, transform.position)) {
             Destroy(gameObject);
         }
-    }
+    }*/
 
 }

@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public Projectile laserPrefab;
     private Projectile laser;
     private Vector2 movementDirection;
-
+    
     private void Update()
     {
         Vector3 position = transform.position;
@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
         // there is not already an active laser
         if (laser == null && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)))
         {
+<<<<<<< Updated upstream
             // Create the laser at the player's position and make it move in the player's facing direction
             laser = Instantiate(laserPrefab, transform.position, );
 
@@ -65,6 +66,13 @@ public class Player : MonoBehaviour
 
 /*            laser.GetComponent<Rigidbody2D>().velocity = movementDirection * 10f; // Adjust the speed of the laser
 */        }
+=======
+            // Create the laser and make it move in the player's current movement direction
+            //laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
+            //laser.GetComponent<Rigidbody2D>().velocity = movementDirection.normalized * 10f; // Adjust the speed of the laser
+            Shoot();
+        }
+>>>>>>> Stashed changes
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -75,4 +83,15 @@ public class Player : MonoBehaviour
             GameManager.Instance.OnPlayerKilled(this);
         }
     }
+<<<<<<< Updated upstream
 }
+=======
+
+    private void Shoot()
+    {
+        laserPrefab = Instantiate(this.laserPrefab, this.transform.position, this.transform.rotation);
+        laserPrefab.Project(this.transform.up);
+        
+    }
+}
+>>>>>>> Stashed changes

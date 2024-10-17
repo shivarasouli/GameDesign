@@ -25,25 +25,25 @@ public class Invaders : MonoBehaviour
 
     private void CreateInvaderGrid()
     {
-        for (int i = 0; i < rows; i++)
-        {
-            float width = 2f * (columns - 1);
-            float height = 2f * (rows - 1);
+        //for (int i = 0; i < r; i++)
+        //{
+            //float width = 2f * (columns - 1);
+            //float height = 2f * (rows - 1);
 
-            Vector2 centerOffset = new Vector2(-width * 0.5f, -height * 0.5f);
-            Vector3 rowPosition = new Vector3(centerOffset.x, (2f * i) + centerOffset.y, 0f);
+            //Vector2 centerOffset = new Vector2(-width * 0.5f, -height * 0.5f);
+            //Vector3 rowPosition = new Vector3(centerOffset.x, (2f * i) + centerOffset.y, 0f);
 
-            for (int j = 0; j < columns; j++)
-            {
+            //for (int j = 0; j < columns; j++)
+            //{
                 // Create a new invader and parent it to this transform
-                Invader invader = Instantiate(prefabs[i], transform);
+                Invader invader = Instantiate(prefabs[0], transform);
 
                 // Calculate and set the position of the invader in the row
-                Vector3 position = rowPosition;
-                position.x += 2f * j;
-                invader.transform.localPosition = position;
-            }
-        }
+              //  Vector3 position = rowPosition;
+                //position.x += 2f * j;
+                //invader.transform.localPosition = position;
+            //}
+        //}
     }
 
     private void Start()
